@@ -16,7 +16,7 @@ export function getApiKey() {
   return process.env.VITE_API_KEY || process.env.NEWS_API_KEY || "";
 }
 
-export function requireApiKey() {
+export function getRequiredApiKey() {
   const apiKey = getApiKey();
 
   if (!apiKey || apiKey === "your_newsapi_key_here") {
