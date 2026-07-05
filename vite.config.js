@@ -1,18 +1,17 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
+import { getApiKeyFromSource, isPlaceholderKey } from "./server/env.js";
 
 const NEWS_API_BASE = "https://newsapi.org/v2/top-headlines";
 
-function getApiKey(env) {
-  return env.VITE_API_KEY || env.NEWS_API_KEY || "";
-}
-
-function createDevProxyHandler(apiKey) {
+function createDevProxyHandler(getKey) {
   return async (req, res) => {
     try {
-      if (!apiKey || apiKey === "your_newsapi_key_here") {
+      const apiKey = getKey();
+
+      if (isPlaceholderKey(apiKey)) {
         throw new Error(
-          "Missing API key. Copy .env.example to .env and set VITE_API_KEY with your NewsAPI key from https://newsapi.org/register"
+          "Missing API key. Copy .env.example to .env and set NEWS_KEY with your NewsAPI key from https://newsapi.org/register"
         );
       }
 
@@ -42,15 +41,15 @@ function createDevProxyHandler(apiKey) {
 }
 
 function newsApiProxyPlugin(env) {
-  const apiKey = getApiKey(env);
-  const handler = createDevProxyHandler(apiKey);
+  const getKey = () => getApiKeyFromSource(env);
+  const handler = createDevProxyHandler(getKey);
 
   const attachProxy = (server) => {
     server.middlewares.use("/api/news", handler);
 
-    if (!apiKey || apiKey === "your_newsapi_key_here") {
+    if (isPlaceholderKey(getKey())) {
       server.config.logger.warn(
-        "\n  VITE_API_KEY is missing. Copy .env.example to .env and add your NewsAPI key.\n"
+        "\n  NEWS_KEY is missing. Copy .env.example to .env and add your NewsAPI key.\n"
       );
     }
   };
