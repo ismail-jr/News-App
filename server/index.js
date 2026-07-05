@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -7,6 +8,7 @@ import { getApiKey } from "./env.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 3000;
+const apiKey = process.env.NEWS_KEY;
 
 app.get("/api/news", createNewsProxyHandler());
 app.use(express.static(path.join(__dirname, "../dist")));

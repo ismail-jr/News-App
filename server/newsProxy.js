@@ -1,6 +1,9 @@
 import { requireApiKey } from "./env.js";
 
-const NEWS_API_BASE = "https://newsapi.org/v2/top-headlines";
+export async function fetchNewsHeadlines(searchParams, apiKey) {
+  if (!apiKey) {
+    throw new Error("Missing NEWS_KEY.");
+  }
 
 export async function fetchNewsHeadlines(searchParams, apiKey = requireApiKey()) {
   const params = new URLSearchParams(searchParams);
