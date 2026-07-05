@@ -1,0 +1,143 @@
+:root {
+  --brand-navy: #051e58;
+  --brand-navy-light: #0d3a8c;
+  --surface: #f4f7fb;
+  --card-radius: 0.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--surface);
+  color: #1a1a2e;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-navbar {
+  background: linear-gradient(135deg, var(--brand-navy), var(--brand-navy-light));
+  box-shadow: 0 2px 12px rgba(5, 30, 88, 0.25);
+}
+
+.category-link {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.5rem 1rem !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-link:hover,
+.category-link:focus-visible {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.category-link.active {
+  color: var(--brand-navy) !important;
+  background: #fff;
+}
+
+.news-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.news-badge {
+  background: var(--brand-navy);
+  vertical-align: middle;
+}
+
+.news-subtitle {
+  font-size: 1.05rem;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.news-card {
+  border: none;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(5, 30, 88, 0.15) !important;
+}
+
+.news-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-source {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-navy-light);
+  margin-bottom: 0.5rem;
+}
+
+.news-read-more {
+  background: var(--brand-navy);
+  border-color: var(--brand-navy);
+}
+
+.news-read-more:hover,
+.news-read-more:focus-visible {
+  background: var(--brand-navy-light);
+  border-color: var(--brand-navy-light);
+}
+
+.state-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  text-align: center;
+  padding: 2rem;
+  border-radius: var(--card-radius);
+}
+
+.app-footer {
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.app-footer a {
+  color: var(--brand-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
