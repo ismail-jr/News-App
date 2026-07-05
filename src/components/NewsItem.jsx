@@ -1,48 +1,39 @@
-import imgi from "../assets/news.jpg";
+import fallbackImage from "../assets/news.jpg";
 
-import React from "react";
-import PropTypes from "prop-types";
+function NewsItem({ title, description, image, url, source }) {
+  const displayTitle = title.length > 80 ? `${title.slice(0, 80)}...` : title;
+  const displayDescription = description
+    ? description.length > 120
+      ? `${description.slice(0, 120)}...`
+      : description
+    : "No description available. Click below to read the full article.";
 
-function NewsItem({ title, description, src, url }) {
   return (
-    <div
-      className="card bg-light text-dark mb-3 d-inline-block my-3 mx-3 py-2 px-2"
-      style={{ maxWidth: "390px", marginLeft: "100px" }}
-    >
+    <article className="card news-card h-100 shadow-sm">
       <img
-        src={src ? src : imgi}
-        style={{ width: "380px", height: "200px" }}
-        alt=""
-        className="card-img-top"
+        src={image || fallbackImage}
+        alt={title}
+        className="card-img-top news-card-image"
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.src = fallbackImage;
+        }}
       />
-      <div className="card-body">
-        <h5 className="card-title">{title.slice(0, 50)}</h5>
-        <p className="card-text">
-          {description
-            ? description.slice(0, 90)
-            : "This news do not have current description now, click read more button below."}
-        </p>
+      <div className="card-body d-flex flex-column">
+        {source && <span className="news-source">{source}</span>}
+        <h2 className="card-title h5">{displayTitle}</h2>
+        <p className="card-text text-muted flex-grow-1">{displayDescription}</p>
         <a
           href={url}
-          className="btn"
-          style={{
-            backgroundColor: "#051e58",
-            color: "#ffffff",
-            fontWeight: "bold",
-          }}
+          className="btn btn-primary news-read-more mt-auto"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Read More
+          Read more
         </a>
       </div>
-    </div>
+    </article>
   );
 }
-
-NewsItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-};
 
 export default NewsItem;

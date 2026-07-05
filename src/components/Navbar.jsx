@@ -1,16 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+function Navbar({ categories, activeCategory, onCategoryChange }) {
+  const formatLabel = (category) =>
+    category.charAt(0).toUpperCase() + category.slice(1);
 
-function Navbar({ setCategory }) {
   return (
-    <nav
-      className="navbar navbar-expand-lg "
-      style={{ backgroundColor: "#051e58", color: "#FFFFFF" }}
-    >
+    <nav className="navbar navbar-expand-lg navbar-dark app-navbar">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          <span className="badge bg-light text-dark fs-4">World News</span>
-        </a>
+        <span className="navbar-brand fw-bold">World News</span>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,73 +15,29 @@ function Navbar({ setCategory }) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("technology")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Technology
-              </div>
-            </li>
-            <li className="nav-item ">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("business")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Business
-              </div>
-            </li>
-            <li className="nav-item">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("health")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Health
-              </div>
-            </li>
-            <li className="nav-item">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("sports")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Sports
-              </div>
-            </li>
-            <li className="nav-item">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("science")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Science
-              </div>
-            </li>
-            <li className="nav-item">
-              <div
-                className="nav-link"
-                onClick={() => setCategory("entertainment")}
-                style={{ fontWeight: "700", color: "white" }}
-              >
-                Entertainment
-              </div>
-            </li>
+          <ul className="navbar-nav ms-auto gap-lg-1">
+            {categories.map((category) => (
+              <li className="nav-item" key={category}>
+                <button
+                  type="button"
+                  className={`nav-link category-link${
+                    activeCategory === category ? " active" : ""
+                  }`}
+                  onClick={() => onCategoryChange(category)}
+                  aria-current={activeCategory === category ? "page" : undefined}
+                >
+                  {formatLabel(category)}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
     </nav>
   );
 }
-
-Navbar.propTypes = {
-  setCategory: PropTypes.func.isRequired,
-};
 
 export default Navbar;
