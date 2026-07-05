@@ -21,7 +21,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['server/**/*.js', 'api/**/*.js', 'vite.config.js'],
+      files: ['server/**/*.js', 'api/**/*.js', 'vite.config.js', 'server/env.js'],
       env: { node: true },
     },
   ],
