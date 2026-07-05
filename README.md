@@ -28,7 +28,13 @@ npm install
 cp .env.example .env
 ```
 
-Then edit `.env` and replace `your_newsapi_key_here` with your real key from https://newsapi.org/register
+Then edit `.env` and set your real key:
+
+```
+NEWS_KEY=your_actual_newsapi_key
+```
+
+Get a free key at https://newsapi.org/register
 
 > **Important:** `.env` is not committed to git. You must create it locally after cloning.
 
@@ -61,7 +67,7 @@ npm start
 
 ### Option 2: Vercel
 
-Deploy as-is. The `api/news.js` serverless function handles API requests. Set `VITE_API_KEY` in your Vercel environment variables.
+Deploy as-is. The `api/news.js` serverless function handles API requests. Set `NEWS_KEY` in your Vercel environment variables.
 
 ## Tech stack
 
