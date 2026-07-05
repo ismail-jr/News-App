@@ -1,10 +1,8 @@
+import { requireApiKey } from "./env.js";
+
 const NEWS_API_BASE = "https://newsapi.org/v2/top-headlines";
 
-export async function fetchNewsHeadlines(searchParams, apiKey) {
-  if (!apiKey) {
-    throw new Error("Missing VITE_API_KEY. Copy .env.example to .env and add your NewsAPI key.");
-  }
-
+export async function fetchNewsHeadlines(searchParams, apiKey = requireApiKey()) {
   const params = new URLSearchParams(searchParams);
   params.set("apiKey", apiKey);
 
@@ -23,11 +21,11 @@ export async function fetchNewsHeadlines(searchParams, apiKey) {
   return data;
 }
 
-export function createNewsProxyHandler(apiKey) {
+export function createNewsProxyHandler() {
   return async (req, res) => {
     try {
       const url = new URL(req.url, "http://localhost");
-      const data = await fetchNewsHeadlines(url.searchParams, apiKey);
+      const data = await fetchNewsHeadlines(url.searchParams);
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify(data));
     } catch (error) {

@@ -28,7 +28,9 @@ npm install
 cp .env.example .env
 ```
 
-Get a free key at https://newsapi.org/register
+Then edit `.env` and replace `your_newsapi_key_here` with your real key from https://newsapi.org/register
+
+> **Important:** `.env` is not committed to git. You must create it locally after cloning.
 
 3. Start the development server:
 
