@@ -2,7 +2,7 @@ const NEWS_API_BASE = "https://newsapi.org/v2/top-headlines";
 
 export async function fetchNewsHeadlines(searchParams, apiKey) {
   if (!apiKey) {
-    throw new Error("Missing VITE_API_KEY. Copy .env.example to .env and add your NewsAPI key.");
+    throw new Error("Missing NEWS_KEY.");
   }
 
   const params = new URLSearchParams(searchParams);
