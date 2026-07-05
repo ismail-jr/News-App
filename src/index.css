@@ -34,6 +34,16 @@ body {
   box-shadow: 0 2px 12px rgba(5, 30, 88, 0.25);
 }
 
+.navbar-logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.navbar-brand {
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+}
+
 .category-link {
   border: none;
   background: transparent;

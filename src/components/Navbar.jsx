@@ -1,3 +1,5 @@
+import logo from "../assets/logo.svg";
+
 function Navbar({ categories, activeCategory, onCategoryChange }) {
   const formatLabel = (category) =>
     category.charAt(0).toUpperCase() + category.slice(1);
@@ -5,7 +7,10 @@ function Navbar({ categories, activeCategory, onCategoryChange }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark app-navbar">
       <div className="container-fluid">
-        <span className="navbar-brand fw-bold">World News</span>
+        <span className="navbar-brand fw-bold d-flex align-items-center gap-2">
+          <img src={logo} alt="" className="navbar-logo" width="40" height="40" />
+          World News
+        </span>
         <button
           className="navbar-toggler"
           type="button"
